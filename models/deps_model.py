@@ -7,10 +7,11 @@ from db.base import Base
 class Department(Base):
     __tablename__ = "departments"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(100), unique=True)
 
-    courses: Mapped[list["Course"]] = relationship(
+    offerings: Mapped[list["CourseOffering"]] = relationship(
         back_populates="department",
         cascade="all, delete-orphan"
     )
+

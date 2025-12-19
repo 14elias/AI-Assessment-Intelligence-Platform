@@ -7,19 +7,19 @@ from db.base import Base
 class Course(Base):
     __tablename__ = "courses"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    department_id: Mapped[int] = mapped_column(
-        ForeignKey("departments.id"), nullable=False
-    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    code: Mapped[str] = mapped_column(String(20), unique=True)
+    name: Mapped[str] = mapped_column(String(150))
 
-    code: Mapped[str] = mapped_column(String(20), nullable=False)
-    name: Mapped[str] = mapped_column(String(150), nullable=False)
-
-    department: Mapped["Department"] = relationship(back_populates="courses")
-    terms: Mapped[list["Term"]] = relationship(
+    topics: Mapped[list["Topic"]] = relationship(
         back_populates="course",
         cascade="all, delete-orphan"
     )
+
+    offerings: Mapped[list["CourseOffering"]] = relationship(
+        back_populates="course"
+    )
+
 
     __table_args__ = (
         # Prevent duplicate course codes inside the same department

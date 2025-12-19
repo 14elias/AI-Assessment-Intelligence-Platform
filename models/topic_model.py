@@ -7,14 +7,15 @@ from db.base import Base
 class Topic(Base):
     __tablename__ = "topics"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    term_id: Mapped[int] = mapped_column(
-        ForeignKey("terms.id"), nullable=False
+    id: Mapped[int] = mapped_column(primary_key=True)
+    course_id: Mapped[int] = mapped_column(
+        ForeignKey("courses.id"), nullable=False
     )
-    name: Mapped[str] = mapped_column(String(150), nullable=False)
+    name: Mapped[str] = mapped_column(String(150))
 
-    term: Mapped["Term"] = relationship(back_populates="topics")
+    course: Mapped["Course"] = relationship(back_populates="topics")
     objectives: Mapped[list["Objective"]] = relationship(
         back_populates="topic",
         cascade="all, delete-orphan"
     )
+
