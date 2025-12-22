@@ -1,4 +1,5 @@
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException
 
@@ -48,7 +49,7 @@ async def get_topic(name_topic, db: AsyncSession):
 
 
 async def get_all_topic(db: AsyncSession):
-    result = await db.execute(select(topic_model.Topic))
+    result = await db.execute(select(topic_model.Topic).options(selectinload(topic_model.Topic.objectives)))
     existing_topic = result.scalars().all()
 
     return existing_topic

@@ -39,6 +39,8 @@ async def get_all_courses(db: AsyncSession):
     result = await db.execute(select(Course))
     courses = result.scalars().all()
 
+    return courses
+
 
 async def delete_course(name, db: AsyncSession):
     stmt = (
