@@ -15,7 +15,7 @@ def build_prompt(questions: list[str], curriculum: dict) -> str:
 
     objectives_text = "\n".join(objective_lines)
 
-    questions_text = format_question(questions)
+    questions_text = questions
 
     prompt = f"""
 You are given:

@@ -7,5 +7,6 @@ class CreateTopic(BaseModel):
     course_id:int
 
 class ResponseTopic(BaseModel):
+    id:int
     name:str
     objectives:list[ResponseObjective]

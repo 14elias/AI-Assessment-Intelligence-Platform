@@ -4,7 +4,7 @@ from core.ai_client import OpenRouterClient
 
 
 
-def map_questions_to_objectives(
+async def map_questions_to_objectives(
     questions: list[str],
     curriculum: dict,
 ) -> dict:
@@ -15,8 +15,9 @@ def map_questions_to_objectives(
     prompt = build_prompt(questions, curriculum)
 
     client = OpenRouterClient()
-    raw_response = client.chat(prompt)
+    raw_response = await client.chat(prompt)
     content = raw_response["choices"][0]["message"]["content"]
+    print(content)
 
     try:
         mapping = json.loads(content)

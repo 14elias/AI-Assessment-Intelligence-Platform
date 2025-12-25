@@ -19,7 +19,7 @@ async def get_all_course_offering(db: AsyncSession = Depends(get_db)):
     return await course_offering_crud.get_all_course_offering(db)
 
 
-@router.get('/get_course_offering', response_model=CourseOfferingResponse)
+@router.get('/get_course_offering')
 async def get_course_offering(
     course_id, 
     dep_id, 
@@ -27,10 +27,19 @@ async def get_course_offering(
     semester_id, 
     db: AsyncSession = Depends(get_db)
 ):
-    return await course_offering_crud.get_objectives(
+    curriculum = await course_offering_crud.get_objectives(
         dep_id = dep_id, 
         course_id = course_id,
         academic_year_id = academic_year_id,
         semester_id = semester_id, 
         db=db
     )
+    objective_lines = []
+    for topic in curriculum.course.topics:
+        for obj in topic.objectives:
+            objective_lines.append(
+                f'{obj.id}: {obj.description}'
+            )
+
+    objectives_text = "\n".join(objective_lines)
+    return objectives_text

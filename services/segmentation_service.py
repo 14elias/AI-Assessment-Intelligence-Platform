@@ -67,7 +67,7 @@ def segment_questions(text: str):
 
             question_text = remove_trailing_noise(question_text)
 
-            if len(options) < 4:
+            if len(options) < 2:
                 raise ValueError("Less than 4 options")
 
             questions.append(

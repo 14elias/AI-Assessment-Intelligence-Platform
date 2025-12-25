@@ -7,4 +7,6 @@ class CreateCourse(BaseModel):
     code:str
 
 class ResponseCourse(BaseModel):
+    id: int
+    name: str
     topics:list[ResponseTopic]

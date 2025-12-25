@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     )
 
     DATABASE_SYNC_URL: str = "sqlite:///./aligned.db" 
+    API_KEY: str
 
     class Config:
         env_file = ".env"

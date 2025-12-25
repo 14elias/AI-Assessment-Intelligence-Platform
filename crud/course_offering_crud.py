@@ -96,7 +96,11 @@ async def get_all_course_offering(db: AsyncSession):
     return result.scalars().all()
 
 
-async def get_objectives(dep_id, academic_year_id, course_id, semester_id, db: AsyncSession):
+async def get_objectives(data, db: AsyncSession):
+    dep_id = data.get('department_id')
+    academic_year_id = data.get('academic_year_id')
+    course_id = data.get('course_id')
+    semester_id = data.get('semester_id')
     stmt = (
         select(CourseOffering)
         .where(

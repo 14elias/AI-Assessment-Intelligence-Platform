@@ -6,4 +6,5 @@ class CreateObjective(BaseModel):
     description: str
 
 class ResponseObjective(BaseModel):
+    id: int
     description: str
