@@ -6,6 +6,6 @@ def extract_text_from_pdf(upload_file) -> str:
 
     with pdfplumber.open(io.BytesIO(upload_file.file.read())) as pdf:
         for page in pdf.pages:
-            text += page.extract_text() or ""
+            text += page.extract_text(layout=True) or ""
 
     return text
