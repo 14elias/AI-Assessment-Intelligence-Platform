@@ -49,14 +49,3 @@ async def upload_exam(
 
     return result
 
-@router.post('/test_upload_exam')
-def test_upload_exam(file: UploadFile = File(...)):
-    if file.content_type != 'application/pdf':
-        raise HTTPException(status_code=400, detail="Only PDF files are allowed")
-    
-    content = pdf_service.extract_text_from_pdf(file)
-    normalized = text_normalizer.normalize_text(content)
-    canonical = exam_canonicalizer.canonicalize(normalized)
-    questions, rejected = segmentation_service.segment_questions(canonical)
-    
-    return questions

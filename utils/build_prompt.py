@@ -25,6 +25,7 @@ You are given:
 
 Your task:
 - For EACH question, determine the MOST RELEVANT learning objective(s).
+- you have to list every question even if there is no object that matches with it
 - A question may map to MORE THAN ONE objective if appropriate.
 - Do NOT invent objectives.
 - If no objective matches, return an empty list.
